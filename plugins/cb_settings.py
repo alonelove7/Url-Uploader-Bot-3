@@ -5,7 +5,6 @@ import psutil
 import shutil
 import string
 import asyncio
-from pyromod import listen
 from pyrogram import Client, filters
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
