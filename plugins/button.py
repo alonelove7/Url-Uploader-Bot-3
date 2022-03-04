@@ -19,14 +19,10 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from pyrogram.types import InputMediaPhoto
 from plugins.functions.display_progress import progress_for_pyrogram, humanbytes
 # https://stackoverflow.com/a/37631799/4723940
-from plugins.link import ddl_call_back
 from PIL import Image
 from plugins.functions.ran_text import random_char
 
-
-
-
-async def youtube_dl_call_back(bot, update):
+async def ytdl_call_back(bot, update):
     cb_data = update.data
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext, ranom = cb_data.split("|")
@@ -299,30 +295,3 @@ async def youtube_dl_call_back(bot, update):
                 message_id=update.message.message_id,
                 disable_web_page_preview=True
             )
-
-@Client.on_callback_query()
-async def button(bot, update):
-    if "|" in update.data:
-        await youtube_dl_call_back(bot, update)
-    elif "=" in update.data:
-        await ddl_call_back(bot, update)
-    elif update.data == "home":
-        await update.message.edit_text(
-            text=Translation.START_TEXT.format(update.from_user.mention),
-            reply_markup=Translation.START_BUTTONS,
-            disable_web_page_preview=True
-        )
-    elif update.data == "help":
-        await update.message.edit_text(
-            text=Translation.HELP_TEXT,
-            reply_markup=Translation.HELP_BUTTONS,
-            disable_web_page_preview=True
-        )
-    elif update.data == "about":
-        await update.message.edit_text(
-            text=Translation.ABOUT_TEXT,
-            reply_markup=Translation.ABOUT_BUTTONS,
-            disable_web_page_preview=True
-        )
-    else:
-        await update.message.delete()
