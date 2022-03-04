@@ -20,7 +20,14 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from pyrogram import filters
 from .database.database import db
 from .functions.help_Nekmo_ffmpeg import take_screen_shot
-
+import psutil
+import shutil
+import string
+import asyncio
+from pyromod import listen
+from asyncio import TimeoutError
+from pyrogram.errors import MessageNotModified
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 
 @Client.on_message(filters.private & filters.photo & ~filters.edited)
 async def photo_handler(bot: Client, event: Message):
