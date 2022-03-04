@@ -21,30 +21,64 @@ from pyrogram import filters
 from .database.database import db
 from .functions.help_Nekmo_ffmpeg import take_screen_shot
 
-@Client.on_message(filters.private & filters.photo)
-async def save_photo(bot, update):
-    
-    await db.set_thumbnail(update.from_user.id, thumbnail=update.photo.file_id)
-    await bot.send_message(chat_id=update.chat.id, text=Translation.SAVED_CUSTOM_THUMB_NAIL, reply_to_message_id=update.message_id)
 
-@Client.on_message(filters.private & filters.command("delthumb"))
-async def delthumbnail(bot, update):
-    
-    await db.set_thumbnail(update.from_user.id, thumbnail=None)
-    await bot.send_message(chat_id=update.chat.id, text=Translation.DEL_ETED_CUSTOM_THUMB_NAIL, reply_to_message_id=update.message_id)
+@Client.on_message(filters.private & filters.photo & ~filters.edited)
+async def photo_handler(bot: Client, event: Message):
+    await AddUserToDatabase(bot, event)
+    FSub = await ForceSub(bot, event)
+    if FSub == 400:
+        return
+    editable = await event.reply_text("**👀 Processing...**")
+    await db.set_thumbnail(event.from_user.id, thumbnail=event.photo.file_id)
+    await editable.edit("**✅ Custom Thumbnail Saved Successfully!**")
 
-@Client.on_message(filters.private & filters.command("showthumb") )
-async def viewthumbnail(bot, update):
-    
-    thumbnail = await db.get_thumbnail(update.from_user.id)
-    if thumbnail is not None:
-        await bot.send_photo(
-        chat_id=update.chat.id,
-        photo=thumbnail,
-        caption=f"Yᴏᴜʀ ᴄᴜʀʀᴇɴᴛ sᴀᴠᴇᴅ ᴛʜᴜᴍʙɴᴀɪʟ 🦠",
-        reply_to_message_id=update.message_id)
+
+@Client.on_message(filters.private & filters.command(["deletethumb", "deletethumbnail"]) & ~filters.edited)
+async def delete_thumb_handler(bot: Client, event: Message):
+    await AddUserToDatabase(bot, event)
+    FSub = await ForceSub(bot, event)
+    if FSub == 400:
+        return
+    await db.set_thumbnail(event.from_user.id, thumbnail=None)
+    await event.reply_text(
+        "**🗑️ Custom Thumbnail Deleted Successfully!**",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("⚙ Configure Settings 👀", callback_data="openSettings")]
+        ])
+    )
+
+
+@Client.on_message(filters.private & filters.command(["showthumb", "showthumbnail"]) & ~filters.edited)
+async def show_thumb_handler(bot: Client, event: Message):
+    await AddUserToDatabase(bot, event)
+    FSub = await ForceSub(bot, event)
+    if FSub == 400:
+        return
+    _thumbnail = await db.get_thumbnail(event.from_user.id)
+    if _thumbnail is not None:
+        try:
+            await bot.send_photo(
+                chat_id=event.chat.id,
+                photo=_thumbnail,
+                text=f"**👆🏻 Your Custom Thumbnail...**", 
+                reply_markup=InlineKeyboardMarkup(
+                    [[InlineKeyboardButton("🗑️ Delete Thumbnail", callback_data="deleteThumbnail")]]
+                ),
+                reply_to_message_id=event.message_id
+            )
+        except Exception as err:
+            try:
+                await bot.send_message(
+                    chat_id=event.chat.id,
+                    text=f"**😐 Unable to send Thumbnail! Got an unexpected Error**",
+                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Close", callback_data="close")],[InlineKeyboardButton("📮 Report issue", url="https://t.me/Tellybots_Support")]]),
+                    reply_to_message_id=event.message_id
+                )
+            except:
+                pass
     else:
-        await update.reply_text(text=f"Nᴏ Tʜᴜᴍʙɴᴀɪʟ ғᴏᴜɴᴅ 🤒")
+        await event.reply_text("**🤧 No Thumbnail Found, Send any image to set it as your custom Thumbnail**", quote=True)
+
 
 async def Gthumb01(bot, update):
     thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
