@@ -78,5 +78,5 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
     elif "deleteThumbnail" in cb.data:
         await db.set_thumbnail(cb.from_user.id, thumbnail=None)
         await cb.answer("Successfully Removed Custom Thumbnail!", show_alert=True)
-   
+        await cb.message.delete(True)
             
