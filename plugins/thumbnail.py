@@ -34,14 +34,15 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from plugins.settings import OpenSettings
 from plugins.database.database import db
+from plugins.config import Config
 
 @Client.on_message(filters.private & filters.photo & ~filters.edited)
 async def photo_handler(bot: Client, event: Message):
-    if not update.from_user:
-        return await update.reply_text("I don't know about you sar :(")
-    await add_user_to_database(bot, update)
+    if not event.from_user:
+        return await event.reply_text("I don't know about you sar :(")
+    await add_user_to_database(bot, event)
     if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, update)
+      fsub = await handle_force_subscribe(bot, event)
       if fsub == 400:
         return
     editable = await event.reply_text("**👀 Processing...**")
@@ -51,11 +52,11 @@ async def photo_handler(bot: Client, event: Message):
 
 @Client.on_message(filters.private & filters.command(["deletethumb", "deletethumbnail"]) & ~filters.edited)
 async def delete_thumb_handler(bot: Client, event: Message):
-    if not update.from_user:
-        return await update.reply_text("I don't know about you sar :(")
-    await add_user_to_database(bot, update)
+    if not event.from_user:
+        return await event.reply_text("I don't know about you sar :(")
+    await add_user_to_database(bot, event)
     if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, update)
+      fsub = await handle_force_subscribe(bot, event)
       if fsub == 400:
         return
     await db.set_thumbnail(event.from_user.id, thumbnail=None)
