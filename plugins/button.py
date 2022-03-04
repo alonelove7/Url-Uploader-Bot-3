@@ -244,14 +244,6 @@ async def youtube_dl_call_back(bot, update):
                         update.message,
                         start_time
                     )
-                )
-            else:
-                logger.info("Did this happen? :\\")
-            end_two = datetime.now()
-            time_taken_for_upload = (end_two - end_one).seconds
-            try:
-                shutil.rmtree(tmp_directory_for_each_user)
-                os.remove(thumbnail)
             except:
                 pass
             await bot.edit_message_text(
