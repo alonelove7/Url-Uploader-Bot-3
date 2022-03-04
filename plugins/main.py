@@ -88,6 +88,14 @@ Pᴏᴡᴇʀᴇᴅ ʙʏ : [Tᴇʟʟʏʙᴏᴛs](https://telegram.me/TellyBots)
         InlineKeyboardButton(' ᴄʟᴏsᴇ', callback_data='close')
         ]]
     )
+    BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton(' ʜᴏᴍᴇ', callback_data='home'),
+        InlineKeyboardButton(' ʜᴇʟᴘ', callback_data='help')
+        ],[
+        InlineKeyboardButton(' ᴄʟᴏsᴇ', callback_data='close')
+        ]]
+    )
 
     IFLONG_FILE_NAME = " Only 64 characters can be named . "
     RENAME_403_ERR = "Sorry. You are not permitted to rename this file."
