@@ -32,12 +32,12 @@ import asyncio
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
-from plugins.settings import OpenSettings
+
 from plugins.database.database import db
 from plugins.config import Config
 from plugins.database.add import add_user_to_database
 from .functions.forcesub import handle_force_subscribe
-from plugins.settings import *
+from plugins.callbacks import *
 
 
 @Client.on_message(filters.private & filters.photo & ~filters.edited)
