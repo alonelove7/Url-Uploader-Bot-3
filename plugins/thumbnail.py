@@ -1,4 +1,9 @@
 # Copyright @Tellybots | @ShriMadhavUk
+
+
+
+
+
 import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -27,6 +32,8 @@ import asyncio
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
+from plugins.settings import OpenSettings
+from plugins.database.database import db
 
 @Client.on_message(filters.private & filters.photo & ~filters.edited)
 async def photo_handler(bot: Client, event: Message):
