@@ -11,14 +11,13 @@ from pyrogram import Client, filters
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
-from plugins.callbacks import *
 from plugins.config import Config
 from plugins.main import Translation
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from plugins.database.add import add_user_to_database
 from .functions.forcesub import handle_force_subscribe
-
+from main import *
 @Client.on_message(filters.command(["start"]) & filters.private)
 async def start(bot, update):
     if not update.from_user:
