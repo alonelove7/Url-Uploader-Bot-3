@@ -36,7 +36,7 @@ async def OpenSettings(event: Message, user_id: int):
 async def callback_handlers(bot: Client, cb: CallbackQuery):
     if "oo" in cb.data:
         await cb.edit_message_text(
-              text = f"✓ I Can't Upload".format(cb.from_user.mention),
+              text = f"✓ I Can't Upload File Size More Than 2GB".format(cb.from_user.mention),
               disable_web_page_preview = True,
               reply_markup = Translation.BUTTONS)
     elif "openSettings" in cb.data:
