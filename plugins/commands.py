@@ -2,7 +2,17 @@
 
 
 import os
-
+import time
+import psutil
+import shutil
+import string
+import asyncio
+from pyromod import listen
+from pyrogram import Client, filters
+from asyncio import TimeoutError
+from pyrogram.errors import MessageNotModified
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
+from plugins.settings import OpenSettings
 from plugins.config import Config
 from plugins.main import Translation
 from pyrogram import Client, filters
