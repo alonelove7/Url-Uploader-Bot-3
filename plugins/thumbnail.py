@@ -45,8 +45,8 @@ async def delete_thumb_handler(bot: Client, event: Message):
 @Client.on_message(filters.private & filters.command(["showthumb", "showthumbnail"]) & ~filters.edited)
 async def show_thumb_handler(bot: Client, event: Message):
 
-    _thumbnail = await db.get_thumbnail(event.from_user.id)
-    if _thumbnail is not None:
+    thumbnail = await db.get_thumbnail(event.from_user.id)
+    if thumbnail is not None:
         try:
             await bot.send_photo(
                 chat_id=event.chat.id,
