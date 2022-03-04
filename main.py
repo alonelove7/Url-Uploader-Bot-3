@@ -34,7 +34,7 @@ async def OpenSettings(event: Message, user_id: int):
 
 @Client.on_callback_query()
 async def callback_handlers(bot: Client, cb: CallbackQuery):
-    elif "oo" in cb.data:
+    if "oo" in cb.data:
         await cb.edit_message_text(
               text = f"✓ I Can't Upload".format(cb.from_user.mention),
               disable_web_page_preview = True,
