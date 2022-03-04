@@ -69,40 +69,27 @@ async def delete_thumb_handler(bot: Client, event: Message):
         ])
     )
 
-
-@Client.on_message(filters.private & filters.command(["showthumb", "showthumbnail"]) & ~filters.edited)
-async def show_thumb_handler(bot: Client, event: Message):
-    if not event.from_user:
-        return await event.reply_text("I don't know about you sar :(")
-    await add_user_to_database(bot, event)
+@Client.on_message(filters.private & filters.command("showthumb") )
+async def viewthumbnail(bot, update):
+    if not update.from_user:
+        return await update.reply_text("I don't know about you sar :(")
+    await add_user_to_database(bot, update)
     if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, event)
+      fsub = await handle_force_subscribe(bot, update)
       if fsub == 400:
-        return
-    thumbnail = await db.get_thumbnail(event.from_user.id)
+        return    
+    thumbnail = await db.get_thumbnail(update.from_user.id)
     if thumbnail is not None:
-        try:
-            await bot.send_photo(
-                chat_id=event.chat.id,
-                photo=thumbnail,
-                text=f"**👆🏻 Your Custom Thumbnail...**", 
-                reply_markup=InlineKeyboardMarkup(
+        await bot.send_photo(
+        chat_id=update.chat.id,
+        photo=thumbnail,
+        caption=f"Your current saved thumbnail 🦠",
+        reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("🗑️ Delete Thumbnail", callback_data="deleteThumbnail")]]
                 ),
-                reply_to_message_id=event.message_id
-            )
-        except Exception as err:
-            try:
-                await bot.send_message(
-                    chat_id=event.chat.id,
-                    text=f"**😐 Unable to send Thumbnail! Got an unexpected Error**",
-                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⛔ Close", callback_data="close")],[InlineKeyboardButton("📮 Report issue", url="https://t.me/Tellybots_Support")]]),
-                    reply_to_message_id=event.message_id
-                )
-            except:
-                pass
+        reply_to_message_id=update.message_id)
     else:
-        await event.reply_text("**🤧 No Thumbnail Found, Send any image to set it as your custom Thumbnail**", quote=True)
+        await update.reply_text(text=f"No Thumbnail found 🤒")
 
 
 async def Gthumb01(bot, update):
