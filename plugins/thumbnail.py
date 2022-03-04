@@ -24,10 +24,7 @@ from .functions.help_Nekmo_ffmpeg import take_screen_shot
 
 @Client.on_message(filters.private & filters.photo & ~filters.edited)
 async def photo_handler(bot: Client, event: Message):
-    await AddUserToDatabase(bot, event)
-    FSub = await ForceSub(bot, event)
-    if FSub == 400:
-        return
+
     editable = await event.reply_text("**👀 Processing...**")
     await db.set_thumbnail(event.from_user.id, thumbnail=event.photo.file_id)
     await editable.edit("**✅ Custom Thumbnail Saved Successfully!**")
@@ -35,10 +32,7 @@ async def photo_handler(bot: Client, event: Message):
 
 @Client.on_message(filters.private & filters.command(["deletethumb", "deletethumbnail"]) & ~filters.edited)
 async def delete_thumb_handler(bot: Client, event: Message):
-    await AddUserToDatabase(bot, event)
-    FSub = await ForceSub(bot, event)
-    if FSub == 400:
-        return
+
     await db.set_thumbnail(event.from_user.id, thumbnail=None)
     await event.reply_text(
         "**🗑️ Custom Thumbnail Deleted Successfully!**",
@@ -50,10 +44,7 @@ async def delete_thumb_handler(bot: Client, event: Message):
 
 @Client.on_message(filters.private & filters.command(["showthumb", "showthumbnail"]) & ~filters.edited)
 async def show_thumb_handler(bot: Client, event: Message):
-    await AddUserToDatabase(bot, event)
-    FSub = await ForceSub(bot, event)
-    if FSub == 400:
-        return
+
     _thumbnail = await db.get_thumbnail(event.from_user.id)
     if _thumbnail is not None:
         try:
