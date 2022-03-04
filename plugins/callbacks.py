@@ -11,8 +11,8 @@ from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from plugins.database.database import db
-
-
+from plugins.link import ddl_call_back
+from plugins.button import youtube_dl_call_back
 
 async def OpenSettings(event: Message, user_id: int):
     try:
