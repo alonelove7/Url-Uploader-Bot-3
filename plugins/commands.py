@@ -24,3 +24,11 @@ async def start(bot, update):
         disable_web_page_preview=True,
         reply_markup=Translation.START_BUTTONS
     )
+
+@Client.on_message(filters.private & filters.command("settings"))
+async def settings_handler(bot: Client, event: Message):
+
+    editable = await event.reply_text(
+        text="**👀 Processing...**"
+    )
+    await OpenSettings(editable, user_id=event.from_user.id)
