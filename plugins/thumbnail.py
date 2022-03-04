@@ -50,7 +50,7 @@ async def show_thumb_handler(bot: Client, event: Message):
         try:
             await bot.send_photo(
                 chat_id=event.chat.id,
-                photo=_thumbnail,
+                photo=thumbnail,
                 text=f"**👆🏻 Your Custom Thumbnail...**", 
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("🗑️ Delete Thumbnail", callback_data="deleteThumbnail")]]
