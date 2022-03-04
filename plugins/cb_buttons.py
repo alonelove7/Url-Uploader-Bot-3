@@ -14,21 +14,16 @@ import os
 import shutil
 import subprocess
 import time
-
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from plugins.config import Config
 
 # the Strings used for this "thing"
-from translation import Translation
+from plugins.main import Translation
 
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-from helper_funcs.display_progress import progress_for_pyrogram, humanbytes
-from plugins.youtube_dl_button import youtube_dl_call_back
+from .functions.display_progress import progress_for_pyrogram, humanbytes
+from plugins.button import youtube_dl_call_back
 from plugins.dl_button import ddl_call_back
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
