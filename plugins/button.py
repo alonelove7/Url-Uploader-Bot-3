@@ -21,7 +21,7 @@ from plugins.functions.display_progress import progress_for_pyrogram, humanbytes
 # https://stackoverflow.com/a/37631799/4723940
 from PIL import Image
 from plugins.functions.ran_text import random_char
-
+from plugins.database.database import db
 async def youtube_dl_call_back(bot, update):
     cb_data = update.data
     # youtube_dl extractors
@@ -208,7 +208,7 @@ async def youtube_dl_call_back(bot, update):
             # ref: message from @Sources_codes
             start_time = time.time()
             # try to upload file
-            if (await db.get_upload_as_doc(cb.from_user.id)) is False:
+            if (await db.get_upload_as_doc(update.from_user.id)) is False:
             elif tg_send_type == "file":
                 thumbnail = await Gthumb01(bot, update)
                 await bot.send_document(
