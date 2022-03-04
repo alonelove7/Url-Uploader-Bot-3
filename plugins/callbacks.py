@@ -36,7 +36,7 @@ async def OpenSettings(event: Message, user_id: int):
 @Client.on_callback_query()
 async def callback_handlers(bot: Client, cb: CallbackQuery):
     if "|" in cb.data:
-        await cb.message.delete(True)
+        await youtube_dl_call_back(bot, cb)
         await cb.message.reply_to_message.delete()
     elif "close" in cb.data:
         await cb.message.delete(True)
