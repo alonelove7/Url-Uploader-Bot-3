@@ -102,4 +102,3 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await cb.answer("Successfully Removed Custom Thumbnail!", show_alert=True)
         await cb.message.delete(True)
             
-
