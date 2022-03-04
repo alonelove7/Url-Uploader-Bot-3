@@ -35,10 +35,10 @@ async def OpenSettings(event: Message, user_id: int):
 
 @Client.on_callback_query()
 async def callback_handlers(bot: Client, cb: CallbackQuery):
-    if "closeMe" in cb.data:
+    if "|" in cb.data:
         await cb.message.delete(True)
         await cb.message.reply_to_message.delete()
-    elif "clox" in cb.data:
+    elif "close" in cb.data:
         await cb.message.delete(True)
         await cb.message.reply_to_message.delete()
     elif "openSettings" in cb.data:
