@@ -2,6 +2,16 @@ import math
 import time
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+
+    PROGRESS = """
+🔰 Sᴘᴇᴇᴅ : {3}/s\n\n
+🌀 Dᴏɴᴇ : {1}\n\n
+🎥 Tᴏᴛᴀʟ sɪᴢᴇ  : {2}\n\n
+⏳ Tɪᴍᴇ ʟᴇғᴛ : {4}\n\n
+"""
+
+
+
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
     diff = now - start
