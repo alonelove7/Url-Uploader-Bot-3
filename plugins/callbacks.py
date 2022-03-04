@@ -6,14 +6,10 @@ import time
 import psutil
 import shutil
 import string
-from plugins.button import *
 from pyrogram import Client, filters
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
-from plugins.config import Config
-from plugins.link import ddl_call_back
-from plugins.main import Translation
 from plugins.database.database import db
 
 
