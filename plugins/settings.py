@@ -1,5 +1,17 @@
 # (c) @Tellybots
 
+
+import os
+import time
+import psutil
+import shutil
+import string
+from pyrogram import Client, filters
+from asyncio import TimeoutError
+from pyrogram.errors import MessageNotModified
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
+from plugins.settings import OpenSettings
+from plugins.database.database import db
 import asyncio
 from plugins.database.database import db
 from pyrogram.errors import FloodWait, MessageNotModified
