@@ -12,7 +12,7 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from plugins.database.database import db
 from plugins.link import ddl_call_back
-from plugins.button import youtube_dl_call_back
+from plugins.button import ytdl_call_back
 
 async def OpenSettings(event: Message, user_id: int):
     try:
@@ -36,7 +36,7 @@ async def OpenSettings(event: Message, user_id: int):
 @Client.on_callback_query()
 async def callback_handlers(bot: Client, cb: CallbackQuery):
     if "|" in cb.data:
-        await youtube_dl_call_back(bot, cb)
+        await ytdl_call_back(bot, cb)
     elif "=" in cb.data:
         await ddl_call_back(bot, cb)
     elif "openSettings" in cb.data:
