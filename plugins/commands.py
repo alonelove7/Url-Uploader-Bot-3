@@ -11,7 +11,7 @@ from pyrogram import Client, filters
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
-from plugins.settings import OpenSettings
+from plugins.callbacks import *
 from plugins.config import Config
 from plugins.main import Translation
 from pyrogram import Client, filters
