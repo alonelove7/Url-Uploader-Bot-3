@@ -24,7 +24,6 @@ import psutil
 import shutil
 import string
 import asyncio
-from pyromod import listen
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
