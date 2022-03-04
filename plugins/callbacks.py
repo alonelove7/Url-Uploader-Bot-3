@@ -9,7 +9,17 @@ from plugins.link import ddl_call_back
 from plugins.main import Translation
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import time
+import psutil
+import shutil
+import string
+from pyrogram import Client, filters
+from asyncio import TimeoutError
+from pyrogram.errors import MessageNotModified
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 
+import asyncio
+from plugins.database.database import db
 
 @Client.on_callback_query()
 async def button(bot, update):
