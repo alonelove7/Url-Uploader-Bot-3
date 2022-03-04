@@ -24,7 +24,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 from .functions.display_progress import progress_for_pyrogram, humanbytes
 from plugins.button import youtube_dl_call_back
-from plugins.dl_button import ddl_call_back
+from plugins.link import ddl_call_back
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
