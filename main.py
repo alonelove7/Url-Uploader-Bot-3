@@ -11,6 +11,7 @@ from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
 from plugins.database.database import db
+from plugins.main import Translation
 
 async def OpenSettings(event: Message, user_id: int):
     try:
@@ -33,7 +34,11 @@ async def OpenSettings(event: Message, user_id: int):
 
 @Client.on_callback_query()
 async def callback_handlers(bot: Client, cb: CallbackQuery):
-
+    elif "oo" in cb.data:
+        await cb.edit_message_text(
+              text = f"✓ I Can't Upload".format(cb.from_user.mention),
+              disable_web_page_preview = True,
+              reply_markup = Translation.BUTTONS)
     elif "openSettings" in cb.data:
         await OpenSettings(cb.message, user_id=cb.from_user.id)
     elif "triggerUploadMode" in cb.data:
