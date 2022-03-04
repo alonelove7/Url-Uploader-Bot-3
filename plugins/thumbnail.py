@@ -35,6 +35,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, 
 from plugins.settings import OpenSettings
 from plugins.database.database import db
 from plugins.config import Config
+from plugins.database.add import add_user_to_database
+from .functions.forcesub import handle_force_subscribe
 
 @Client.on_message(filters.private & filters.photo & ~filters.edited)
 async def photo_handler(bot: Client, event: Message):
