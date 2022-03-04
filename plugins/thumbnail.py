@@ -70,11 +70,11 @@ async def delete_thumb_handler(bot: Client, event: Message):
 
 @Client.on_message(filters.private & filters.command(["showthumb", "showthumbnail"]) & ~filters.edited)
 async def show_thumb_handler(bot: Client, event: Message):
-    if not update.from_user:
-        return await update.reply_text("I don't know about you sar :(")
-    await add_user_to_database(bot, update)
+    if not event.from_user:
+        return await event.reply_text("I don't know about you sar :(")
+    await add_user_to_database(bot, event)
     if Config.UPDATES_CHANNEL:
-      fsub = await handle_force_subscribe(bot, update)
+      fsub = await handle_force_subscribe(bot, event)
       if fsub == 400:
         return
     thumbnail = await db.get_thumbnail(event.from_user.id)
