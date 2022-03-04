@@ -1,14 +1,9 @@
 import math
 import time
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from plugins.main import Translation
 
 
-    PROGRESS = """
-🔰 Sᴘᴇᴇᴅ : {3}/s\n\n
-🌀 Dᴏɴᴇ : {1}\n\n
-🎥 Tᴏᴛᴀʟ sɪᴢᴇ  : {2}\n\n
-⏳ Tɪᴍᴇ ʟᴇғᴛ : {4}\n\n
-"""
 
 
 
@@ -30,7 +25,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
             ''.join(["" for i in range(20 - math.floor(percentage / 5))])
         )
 
-        tmp = progress + PROGRESS.format(
+        tmp = progress + Translation.PROGRESS.format(
             round(percentage, 2),
             humanbytes(current),
             humanbytes(total),
