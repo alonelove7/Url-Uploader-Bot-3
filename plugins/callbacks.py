@@ -38,8 +38,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
     if "|" in cb.data:
         await youtube_dl_call_back(bot, cb)
     elif "=" in cb.data:
-        await ddl(bot, cb)
-        await cb.message.reply_to_message.delete()
+        await ddl_call_back(bot, cb)
     elif "openSettings" in cb.data:
         await OpenSettings(cb.message, user_id=cb.from_user.id)
     elif "triggerUploadMode" in cb.data:
