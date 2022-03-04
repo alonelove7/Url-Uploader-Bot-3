@@ -1,12 +1,7 @@
 # © Shrimadhav Uk | @Tellybots
 
 import os
-from plugins.config import Config
-from plugins.button import youtube_dl_call_back
-from plugins.link import ddl_call_back
-from plugins.main import Translation
-from pyrogram import Client
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import asyncio
 import time
 import psutil
 import shutil
@@ -15,8 +10,10 @@ from pyrogram import Client, filters
 from asyncio import TimeoutError
 from pyrogram.errors import MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery, ForceReply
-
-import asyncio
+from plugins.config import Config
+from plugins.button import youtube_dl_call_back
+from plugins.link import ddl_call_back
+from plugins.main import Translation
 from plugins.database.database import db
 
 @Client.on_callback_query()
