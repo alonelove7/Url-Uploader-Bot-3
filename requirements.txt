@@ -1,4 +1,4 @@
-aiohttp
+aiohttp<=3.8.1
 loggers
 beautifulsoup4
 hachoir
@@ -12,7 +12,8 @@ motor
 aiofiles
 dnspython
 psutil
-pyrogram
-tgcrypto
+pyrogram==1.4.16
+tgcrypto<=1.2.3
 yt-dlp
 pyromod
+python-dotenv<=0.20.0
